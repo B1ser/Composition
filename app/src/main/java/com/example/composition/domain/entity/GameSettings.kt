@@ -1,8 +1,13 @@
 package com.example.composition.domain.entity
 
-data class GameSettings (
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+
+@Parcelize
+data class GameSettings(
     val maxSumValue : Int ,
     val minCountOfRight : Int,
     val minPercentOfRightAnswers : Int,
     val gameTimeInSeconds : Int
-)
+) : Parcelable
