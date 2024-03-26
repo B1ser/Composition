@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.composition.R
 import com.example.composition.databinding.FragmentChooseLevelBinding
+import com.example.composition.domain.entity.Level
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -43,27 +44,38 @@ class ChooseLevelFragment : Fragment() {
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.buttonLevelTest.setOnClickListener{
+            launchCurrentLevel(Level.TEST)
+        }
+        binding.buttonLevelEasy.setOnClickListener{
+            launchCurrentLevel(Level.EASY)
+        }
+        binding.buttonLevelNormal.setOnClickListener{
+            launchCurrentLevel(Level.NORMAL)
+        }
+        binding.buttonLevelHard.setOnClickListener{
+            launchCurrentLevel(Level.HARD)
+        }
+    }
+
+    private fun launchCurrentLevel(level: Level) {
+        val fragment = GameFragment.newInstance(level)
+        requireActivity().supportFragmentManager.beginTransaction()
+            .replace(R.id.main_container, fragment)
+            .addToBackStack(GameFragment.NAME)
+            .commit()
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment fragment_choose_level.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            ChooseLevelFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+
+        fun newInstance () : ChooseLevelFragment{
+            return ChooseLevelFragment()
+        }
     }
 }
