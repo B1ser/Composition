@@ -7,4 +7,7 @@ class Question (
     val visibleNumbers : Int,
     //варианты второго числа
     val options : List<Int>
-)
+){
+    val rightAnswer : Int
+        get() = sum - visibleNumbers
+}
