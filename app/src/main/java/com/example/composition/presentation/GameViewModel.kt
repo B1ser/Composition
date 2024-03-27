@@ -73,6 +73,7 @@ class GameViewModel(
         getGameSettings()
         startTimer()
         generateQuestion()
+        updateProgress()
     }
 
     fun chooseAnswer(number: Int) {
@@ -92,6 +93,9 @@ class GameViewModel(
         _enoughPercent.value = percent >= gameSettings.minPercentOfRightAnswers
     }
     private fun calculatePercentOfRightAnswer() : Int{
+        if (countOfQuestions == 0){
+            return 0
+        }
         return ((countOfRightAnswers / countOfQuestions.toDouble()) * 100).toInt()
     }
     private fun checkAnswer(number: Int) {

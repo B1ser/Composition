@@ -12,6 +12,7 @@ import com.example.composition.databinding.FragmentGameFinishedBinding
 import com.example.composition.domain.entity.GameResult
 
 class GameFinishedFragment : Fragment() {
+
     private lateinit var gameResult: GameResult
 
     private var _binding : FragmentGameFinishedBinding? = null
